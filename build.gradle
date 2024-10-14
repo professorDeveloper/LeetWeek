@@ -27,10 +27,15 @@ dependencies {
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.14.0' // Jackson Kotlin module
 
 }
-
+jar {
+    manifest {
+        attributes 'Main-Class': 'MyTelegramBotKt' // O'zingizning asosiy sinf nomini qo'shing
+    }
+}
 test {
     useJUnitPlatform()
 }
+
 
 compileKotlin {
     kotlinOptions.jvmTarget = '19'
