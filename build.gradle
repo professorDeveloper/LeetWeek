@@ -1,0 +1,48 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.8.0'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral() // Default Maven repository
+    maven { url "https://jitpack.io" } // JitPack repository for additional libraries
+}
+
+dependencies {
+    // Kotlin standard library and testing
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.8.0'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+
+    // Telegram Bots library
+    implementation 'org.telegram:telegrambots:6.7.0'
+    implementation 'org.telegram:telegrambots-spring-boot-starter:6.7.0'
+
+
+    // SLF4J logging
+    implementation 'org.slf4j:slf4j-api:2.0.5' // Logging API
+    implementation 'ch.qos.logback:logback-classic:1.4.5' // Logback implementation
+
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.14.0' // Jackson Kotlin module
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = '19'
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = '19'
+}
+
+// Optional: Set JVM toolchain (if needed)
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(19)) // Set the Java version here
+    }
+}
