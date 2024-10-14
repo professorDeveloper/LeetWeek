@@ -1,4 +1,4 @@
-# Telegram Bot with Firebase Integration
+# Telegram Bot with LeetCode Solve Integration
 
 This project implements a Telegram bot in Kotlin that connects to Firebase to manage tasks, balance (coins), and user data. The bot retrieves tasks, shows the user's coin balance, and stores new user data when a user interacts with the bot for the first time.
 
