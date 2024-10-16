@@ -9,8 +9,6 @@ fun main() {
     val userRepository = JsonUserRepository("users.json")
     val taskRepository = JsonTaskRepository("tasks.json")
 
-    // Removed the task initialization logic
-    // initializeTasksIfNeeded(taskRepository)
 
     val botsApi = TelegramBotsApi(DefaultBotSession::class.java)
     try {
@@ -20,5 +18,11 @@ fun main() {
         e.printStackTrace()
     }
 }
+
+//class Solution {
+//    fun addStrings(num1: String, num2: String): String {
+//        if ()
+//    }
+//}
 
 // Removed the initializeTasksIfNeeded function entirely
