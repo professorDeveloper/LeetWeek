@@ -101,10 +101,40 @@ class MyTelegramBot(
             "profile" -> sendProfileInfo(chatId, userId)
             "balance" -> sendBalanceInfo(chatId, userId)
             "leetcode" -> sendLeetcodeAnswers(chatId)
-            "tasks" -> sendTasks(chatId, userId)
+            "tasks" -> sendTasks(chatId, userId)//
+            callbackQuery.data.contains("task_button") ?: "" -> handleCompleteTask(
+                chatId,
+                userId,
+                callbackData = callbackQuery.data
+            )
+
+
             else -> executeMessage(SendMessage(chatId, "Unknown command."))
         }
     }
+
+    private fun handleCompleteTask(chatId: String, userId: String, callbackData: String) {
+        // Extract the task ID from the callback data
+        val taskId = callbackData.removePrefix("complete_task_")
+
+        // Mark the task as completed in the repository
+        val task = taskRepository.getTaskById(taskId)
+        if (task != null && task.userId == userId) {
+            if (!task.isDone) {
+//                taskRepository.updateTaskStatus(taskId, true)
+                val responseMessage = "✅ Task '${task.task}' has been marked as completed!"
+                executeMessage(SendMessage(chatId, responseMessage))
+            } else {
+                executeMessage(SendMessage(chatId, "⚠️ This task is already completed."))
+            }
+        } else {
+            executeMessage(SendMessage(chatId, "❌ Task not found or you don't have permission to modify it."))
+        }
+
+        // Optionally, refresh the tasks list
+        sendTasks(chatId, userId)
+    }
+
 
     private fun sendProfileInfo(chatId: String, userId: String) {
         val profileMessage = SendMessage().apply {
@@ -138,10 +168,11 @@ class MyTelegramBot(
 
         // Creating buttons for each task
         val buttons = tasks.map { task ->
-            createButton("Complete: ${task.task}", "complete_task_${task.isDone}")
+            createButton("Complete: ${task.task}", "task_button${task.id}")
         }.chunked(1) // Create rows of buttons (1 task per row for clarity)
 
         keyboard.keyboard = buttons
+
 
         val tasksMessage = SendMessage().apply {
             this.chatId = chatId
