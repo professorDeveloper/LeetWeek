@@ -2,7 +2,7 @@
 Creator : azamov
 Date : 11/20/2024
 Current Project :LeetBot
-Package :
+Package :com.eyecom
  ***/
 fun main() {
     val array = arrayOf(2,3,4,5)
