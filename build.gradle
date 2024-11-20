@@ -18,6 +18,7 @@ dependencies {
     // Telegram Bots library
     implementation 'org.telegram:telegrambots:6.7.0'
     implementation 'org.telegram:telegrambots-spring-boot-starter:6.7.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
 
 
     // SLF4J logging
