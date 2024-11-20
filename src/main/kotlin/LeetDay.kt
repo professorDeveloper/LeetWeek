@@ -14,14 +14,11 @@ fun maximumSubarraySum(nums: IntArray, k: Int): Long {
     var maxSum = 0L
     var currentSum = 0L
 
-    // Katta subarrayni har bir qadamda tekshirish
     for (i in 0 until k) {
         currentSum += nums[i].toLong()
     }
 
-    // HashSet bilan takrorlanishni tekshirish
     for (i in 0 until nums.size - k + 1) {
-        // HashSet yordamida takrorlanishni tekshirish
         val seen = mutableSetOf<Int>()
         var isValid = true
 
@@ -32,7 +29,6 @@ fun maximumSubarraySum(nums: IntArray, k: Int): Long {
             }
         }
 
-        // Takrorlanish bo'lmasa, summani hisoblash
         if (isValid) {
             currentSum = nums.slice(i until i + k).sumOf { it.toLong() }
             maxSum = maxOf(maxSum, currentSum)
